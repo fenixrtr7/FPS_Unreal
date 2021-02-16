@@ -57,8 +57,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &AMyCharacter::StartJump);
 	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &AMyCharacter::StopJump);
 
-	PlayerInputComponent->BindAction("Fire2", IE_Pressed, this, &AMyCharacter::Shooting);
-	PlayerInputComponent->BindAction("Fire2", IE_Released, this, &AMyCharacter::StopShoot);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AMyCharacter::Shooting);
+	PlayerInputComponent->BindAction("Fire", IE_Released, this, &AMyCharacter::StopShoot);
 }
 
 void AMyCharacter::MoveForward(float value)
@@ -112,7 +112,8 @@ void AMyCharacter::StartShoot()
 
 	if (hasHit && hitInfo.GetActor())
 	{
-		hitInfo.GetActor()->Destroy();
+		//hitInfo.GetActor()->Destroy();
+		UE_LOG(LogTemp, Warning, TEXT("Bone Name: %s"), *hitInfo.BoneName.ToString());
 	}
 }
 
