@@ -7,6 +7,7 @@
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
 #include "TimerManager.h"
+#include "Enemy.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -113,7 +114,17 @@ void AMyCharacter::StartShoot()
 	if (hasHit && hitInfo.GetActor())
 	{
 		//hitInfo.GetActor()->Destroy();
-		UE_LOG(LogTemp, Warning, TEXT("Bone Name: %s"), *hitInfo.BoneName.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("Bone Name: %s"), *hitInfo.BoneName.ToString());
+
+		AEnemy* enemy = Cast<AEnemy>(hitInfo.GetActor());
+		if (enemy && damages.Contains(hitInfo.BoneName))
+		{
+			float damagePercentage = damages[hitInfo.BoneName];
+			float totalDamage = damage * damagePercentage;
+			enemy->life -= totalDamage;
+
+			UE_LOG(LogTemp, Warning, TEXT("Enemy life: %f"), enemy->life);
+		}
 	}
 }
 

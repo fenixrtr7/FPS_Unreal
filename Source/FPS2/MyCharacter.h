@@ -27,11 +27,14 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere) float rotationSpeed = 45;
+	UPROPERTY(EditAnywhere) float damage = 100;
 
 	// Add CAM
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) class UCameraComponent* cam;
 	UPROPERTY(VisibleAnywhere) class USkeletalMeshComponent* arms;
 	UPROPERTY(VisibleAnywhere) class USkeletalMeshComponent* weapon;
+
+	UPROPERTY(EditAnywhere) TMap<FName, float> damages;
 
 	FTimerHandle timerShootHandle;
 
