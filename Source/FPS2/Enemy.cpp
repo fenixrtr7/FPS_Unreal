@@ -32,3 +32,29 @@ void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AEnemy::Damage(float CurrentDamage, FName BoneName)
+{
+	if (damages.Contains(BoneName))
+	{
+		float damagePercentage = damages[BoneName];
+		float totalDamage = CurrentDamage * damagePercentage;
+		life -= totalDamage;
+
+		/*UE_LOG(LogTemp, Warning, TEXT("Enemy life: %f"), life);
+		UE_LOG(LogTemp, Warning, TEXT("Ejecutamos!!!!"));*/
+
+		if (life <= 0)
+		{
+			Destroy();
+		}
+	}
+}
+
+void AEnemy::Cure(float amount)
+{
+	life += amount;
+
+	if (life >= maxLife)
+		life = maxLife;
+}
+

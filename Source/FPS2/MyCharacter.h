@@ -28,15 +28,15 @@ public:
 
 	UPROPERTY(EditAnywhere) float rotationSpeed = 45;
 	UPROPERTY(EditAnywhere) float damage = 100;
+	UPROPERTY(EditAnywhere) float healAmount = 50;
 
 	// Add CAM
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) class UCameraComponent* cam;
 	UPROPERTY(VisibleAnywhere) class USkeletalMeshComponent* arms;
 	UPROPERTY(VisibleAnywhere) class USkeletalMeshComponent* weapon;
 
-	UPROPERTY(EditAnywhere) TMap<FName, float> damages;
-
 	FTimerHandle timerShootHandle;
+	FTimerHandle timerShootHandle2;
 
 private:
 	void MoveForward(float value);
@@ -48,6 +48,13 @@ private:
 	void StopJump();
 
 	void StartShoot();
-	void Shooting();
+	void ShootTimer();
 	void StopShoot();
+
+	void StartShoot2();
+	void ShootTimer2();
+	void StopShoot2();
+
+	void Shoot(int amount, float shake);
+	void Heal();
 };

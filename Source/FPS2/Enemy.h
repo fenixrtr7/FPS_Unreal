@@ -4,10 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Damagable.h"
+#include "Curable.h"
 #include "Enemy.generated.h"
 
+
 UCLASS()
-class FPS2_API AEnemy : public ACharacter
+class FPS2_API AEnemy : public ACharacter, public IDamagable, public ICurable
 {
 	GENERATED_BODY()
 
@@ -27,4 +30,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(EditAnywhere) float life = 100;
+	UPROPERTY(EditAnywhere) float maxLife = 100;
+
+	UPROPERTY(EditAnywhere) TMap<FName, float> damages;
+
+	void Damage(float CurrentDamage, FName BoneName) override;
+	void Cure(float amount) override;
 };
