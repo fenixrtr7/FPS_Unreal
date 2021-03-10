@@ -31,6 +31,7 @@ public:
 	UPROPERTY(EditAnywhere) float healAmount = 50;
 
 	// Add CAM
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) class ULifeComponent* life;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) class UCameraComponent* cam;
 	UPROPERTY(VisibleAnywhere) class USkeletalMeshComponent* arms;
 	UPROPERTY(VisibleAnywhere) class USkeletalMeshComponent* weapon;

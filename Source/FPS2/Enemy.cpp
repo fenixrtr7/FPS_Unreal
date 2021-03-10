@@ -2,6 +2,7 @@
 
 
 #include "Enemy.h"
+#include "LifeComponent.h"
 
 // Sets default values
 AEnemy::AEnemy()
@@ -9,6 +10,7 @@ AEnemy::AEnemy()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	life = CreateDefaultSubobject<ULifeComponent>("LifeComponent");
 }
 
 // Called when the game starts or when spawned
@@ -32,29 +34,13 @@ void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void AEnemy::Damage(float CurrentDamage, FName BoneName)
+void AEnemy::Damage(float amount, FName boneName)
 {
-	if (damages.Contains(BoneName))
-	{
-		float damagePercentage = damages[BoneName];
-		float totalDamage = CurrentDamage * damagePercentage;
-		life -= totalDamage;
-
-		/*UE_LOG(LogTemp, Warning, TEXT("Enemy life: %f"), life);
-		UE_LOG(LogTemp, Warning, TEXT("Ejecutamos!!!!"));*/
-
-		if (life <= 0)
-		{
-			Destroy();
-		}
-	}
+	life->TakeDamage(amount, boneName);
 }
 
 void AEnemy::Cure(float amount)
 {
-	life += amount;
-
-	if (life >= maxLife)
-		life = maxLife;
+	life->Heal(amount);
 }
 

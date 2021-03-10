@@ -2,33 +2,30 @@
 
 
 #include "LifeComponent.h"
+#include "GameFramework\Actor.h"
 
-// Sets default values for this component's properties
-ULifeComponent::ULifeComponent()
+void ULifeComponent::TakeDamage(float amount, FName boneName)
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	if (damages.Contains(boneName))
+	{
+		float damagePercentage = damages[boneName];
+		float totalDamage = amount * damagePercentage;
+		life -= totalDamage;
 
-	// ...
+		/*UE_LOG(LogTemp, Warning, TEXT("Enemy life: %f"), life);
+		UE_LOG(LogTemp, Warning, TEXT("Ejecutamos!!!!"));*/
+
+		if (life <= 0)
+		{
+			GetOwner()->Destroy();
+		}
+	}
 }
 
-
-// Called when the game starts
-void ULifeComponent::BeginPlay()
+void ULifeComponent::Heal(float amount)
 {
-	Super::BeginPlay();
+	life += amount;
 
-	// ...
-	
+	if (life >= maxLife)
+		life = maxLife;
 }
-
-
-// Called every frame
-void ULifeComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
-}
-

@@ -29,11 +29,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere) float life = 100;
-	UPROPERTY(EditAnywhere) float maxLife = 100;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) class ULifeComponent* life;
 
-	UPROPERTY(EditAnywhere) TMap<FName, float> damages;
-
-	void Damage(float CurrentDamage, FName BoneName) override;
+	void Damage(float amount, FName boneName) override;
 	void Cure(float amount) override;
 };

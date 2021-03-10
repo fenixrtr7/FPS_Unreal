@@ -10,12 +10,15 @@
 #include "Enemy.h"
 #include "Damagable.h"
 #include "Pared.h"
+#include "LifeComponent.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	life = CreateDefaultSubobject<ULifeComponent>("Life Component");
 
 	// Add Cam
 	cam = CreateDefaultSubobject<UCameraComponent>("Cam");

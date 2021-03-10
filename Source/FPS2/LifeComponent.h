@@ -12,17 +12,11 @@ class FPS2_API ULifeComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	// Sets default values for this component's properties
-	ULifeComponent();
+public:
+	UPROPERTY(EditAnywhere) float life;
+	UPROPERTY(EditAnywhere) float maxLife;
+	UPROPERTY(EditAnywhere) TMap<FName, float> damages;
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-		
+	void TakeDamage(float amount, FName boneName);
+	void Heal(float amount);
 };
