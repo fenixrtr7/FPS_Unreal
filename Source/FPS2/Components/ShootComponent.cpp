@@ -4,8 +4,8 @@
 #include "ShootComponent.h"
 #include "Engine/World.h"
 #include "DrawDebugHelpers.h"
-#include "FPS2\Damagable.h"
-#include "FPS2\Pared.h"
+#include "FPS2/Damagable.h"
+#include "FPS2/Pared.h"
 
 void UShootComponent::Shoot(int amount, float shake)
 {

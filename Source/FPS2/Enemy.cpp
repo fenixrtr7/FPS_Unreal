@@ -3,6 +3,7 @@
 
 #include "Enemy.h"
 #include "LifeComponent.h"
+#include "Engine/TargetPoint.h"
 
 // Sets default values
 AEnemy::AEnemy()
@@ -42,5 +43,10 @@ void AEnemy::Damage(float amount, FName boneName)
 void AEnemy::Cure(float amount)
 {
 	life->Heal(amount);
+}
+
+TArray<ATargetPoint*> AEnemy::GetWaypoints()
+{
+	return waypoints;
 }
 

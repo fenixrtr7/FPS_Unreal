@@ -6,11 +6,12 @@
 #include "GameFramework/Character.h"
 #include "Damagable.h"
 #include "Curable.h"
+#include "MyInterface/PatrolObject.h"
 #include "Enemy.generated.h"
 
 
 UCLASS()
-class FPS2_API AEnemy : public ACharacter, public IDamagable, public ICurable
+class FPS2_API AEnemy : public ACharacter, public IDamagable, public ICurable, public IPatrolObject
 {
 	GENERATED_BODY()
 
@@ -30,7 +31,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite) class ULifeComponent* life;
+	UPROPERTY(EditAnywhere) TArray<class ATargetPoint*> waypoints;
 
 	void Damage(float amount, FName boneName) override;
 	void Cure(float amount) override;
+	TArray<class ATargetPoint*> GetWaypoints() override;
 };
